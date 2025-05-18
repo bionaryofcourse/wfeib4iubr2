@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>My Portfolio</title>
+<style>
+  /* Reset and base styles */
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: 
+      linear-gradient(rgba(18,18,18,0.7), rgba(18,18,18,0.7)),
+      url('https://static.promediateknologi.id/crop/0x0:0x0/0x0/webp/photo/p2/78/2025/04/15/10-Anime-Shonen-Terbaik-Sepanjang-Masa-Menurut-Fans-Jepang-Siapa-Nomor-1-1177896819.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: #f0f0f0;
+    line-height: 1.6;
+  }
+  a {
+    color: #d6bbff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  a:hover {
+    color: #f9f5ff;
+  }
+  header {
+    background-color: rgba(32, 32, 32, 0.85);
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgb(0 0 0 / 0.7);
+  }
+  .logo-name {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+  .logo-name img.logo {
+    height: 40px;
+    width: 40px;
+    object-fit: contain;
+    border-radius: 6px;
+  }
+  header h1 {
+    font-size: 1.8rem;
+    letter-spacing: 2px;
+    color: #d088ff;
+    margin: 0;
+  }
+  nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 25px;
+  }
+  nav ul li {
+    font-weight: 600;
+  }
+  nav ul li a {
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1.3px;
+  }
+
+  /* Hero Section */
+  #hero {
+    min-height: 90vh;
+    background: rgba(0, 0, 0, 0.6);
+    margin: 40px auto 60px;
+    max-width: 1000px;
+    border-radius: 15px;
+    padding: 50px 30px;
+    box-shadow: 0 10px 15px rgba(0,0,0,0.8);
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    color: #ddd;
+  }
+  #hero .logo-container {
+    flex: 0 0 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  #hero .logo-container img {
+    width: 130px;
+    height: 130px;
+    border-radius: 15px;
+    object-fit: contain;
+    box-shadow: 0 0 15px #7c49ac;
+  }
+  #hero .intro-text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  #hero h2 {
+    font-size: 3rem;
+    margin: 0 0 15px 0;
+    color: #c5a3ff;
+    text-shadow: 0 0 10px #7c49ac;
+  }
+  #hero p.description {
+    font-size: 1.2rem;
+    line-height: 1.4;
+    margin-bottom: 25px;
+  }
+  #hero .social-links {
+    display: flex;
+    gap: 20px;
+  }
+  #hero .social-links a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #d6bbff;
+    font-weight: 600;
+    font-size: 1rem;
+    background: rgba(63,0,113,0.3);
+    padding: 8px 15px;
+    border-radius: 25px;
+    box-shadow: 0 0 10px rgba(182, 134, 255, 0.6);
+    transition: background 0.3s ease, color 0.3s ease;
+  }
+  #hero .social-links a:hover {
+    background: rgba(182, 134, 255, 0.7);
+    color: #fff;
+  }
+  #hero .social-links img.icon {
+    width: 22px;
+    height: 22px;
+    filter: invert(1);
+  }
+
+  /* Section containers */
+  section {
+    max-width: 1000px;
+    margin: 0 auto 80px;
+    padding: 0 20px;
+    background: rgba(0,0,0,0.65);
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.8);
+    color: #ddd;
+  }
+  section h3 {
+    text-align: center;
+    font-size: 2rem;
+    color: #b296ff;
+    padding: 40px 0 30px;
+    margin: 0;
+    text-shadow: 0 0 10px #6f3da6;
+  }
+  section p, .about-text {
+    max-width: 700px;
+    margin: 0 auto 40px;
+    font-size: 1.1rem;
+    color: #ccc;
+  }
+
+  /* About Me grid with right alignment */
+  #about#about .photos-grid {
+  display: flex;
+  overflow-x: auto;
+  gap: 25px;
+  padding: 20px 0;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch; /* Untuk smooth scrolling di iOS */
+}
+
+#about .photos-grid {
+  display: flex;
+  gap: 25px;
+  padding: 20px 0;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+}
+
+#about .photos-grid figure {
+  width: 180px; /* Ukuran persegi */
+  height: 180px; /* Harus sama dengan width */
+  flex-shrink: 0;
+  scroll-snap-align: start;
+  margin: 0;
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  transition: all 0.4s ease; /* Animasi hover */
+  cursor: pointer;
+}
+
+#about .photos-grid img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease; /* Animasi zoom */
+}
+
+#about .photos-grid figcaption {
+  position: absolute;
+  bottom: -50px; /* Awalnya tersembunyi */
+  left: 0;
+  right: 0;
+  background: rgba(63, 0, 113, 0.8);
+  color: #fff;
+  padding: 10px;
+  text-align: center;
+  font-size: 0.9rem;
+  transition: bottom 0.3s ease; /* Animasi muncul */
+}
+
+/* 🔥 Efek Hover Keren */
+#about .photos-container {
+    padding: 20px;
+    position: relative;
+  }
+
+  #about .photos-grid {
+    display: flex;
+    gap: 30px;
+    padding: 30px 0;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+  }
+
+  #about .photos-grid figure {
+    width: 200px;
+    height: 200px;
+    flex-shrink: 0;
+    scroll-snap-align: start;
+    margin: 0;
+    position: relative;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
+    cursor: pointer;
+    z-index: 1;
+  }
+
+  #about .photos-grid img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s cubic-bezier(0.2, 0.9, 0.4, 1.3);
+  }
+
+  #about .photos-grid figcaption {
+    position: absolute;
+    bottom: -100%;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(63,0,113,0.9));
+    color: white;
+    padding: 15px;
+    text-align: center;
+    transition: bottom 0.4s ease;
+  }
+
+  /* 🔥 Efek Proximity Zoom */
+  #about .photos-grid figure:hover {
+    transform: scale(1.15);
+    box-shadow: 0 15px 30px rgba(182, 134, 255, 0.6);
+    z-index: 10;
+  }
+
+  #about .photos-grid figure:hover img {
+    transform: scale(1.3);
+  }
+
+  #about .photos-grid figure:hover figcaption {
+    bottom: 0;
+  }
+
+  /* Efek saat cursor mendekati gambar */
+  #about .photos-grid figure {
+    transform-origin: center center;
+  }
+
+  #about .photos-grid:hover figure:not(:hover) {
+    transform: scale(0.95);
+  }
+
+/* Style scrollbar (opsional) */
+#about .photos-grid::-webkit-scrollbar {
+  height: 8px;
+}
+#about .photos-grid::-webkit-scrollbar-track {
+  background: rgba(63,0,113,0.3);
+  border-radius: 10px;
+}
+#about .photos-grid::-webkit-scrollbar-thumb {
+  background: #7c49ac;
+  border-radius: 10px;
+}
+#about .photos-container {
+  max-width: 100%;
+  overflow: hidden;
+  position: relative;
+  padding: 0 20px;
+}
+
+  /* Projects */
+  #projects .project-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+    gap: 30px 40px;
+    padding-bottom: 40px;
+  }
+  .project-card {
+    background: rgba(50, 17, 78, 0.7);
+    border-radius: 12px;
+    box-shadow: 0 8px 15px rgba(123, 63, 221, 0.5);
+    padding: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .project-card:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 15px 25px rgba(148, 94, 255, 0.9);
+  }
+  .project-title {
+    font-weight: 700;
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+    color: #1a151c;
+  }
+  .project-description {
+    flex-grow: 1;
+    font-size: 1rem;
+    color: #ddd;
+    margin-bottom: 20px;
+  }
+  .project-link {
+    text-align: right;
+  }
+  .project-link a {
+    font-weight: 600;
+    font-size: 1rem;
+    color: #bfa8ff;
+    border-bottom: 2px solid transparent;
+    padding-bottom: 2px;
+  }
+  .project-link a:hover {
+    border-color: #e0d3ff;
+  }
+
+  /* Specific background for Project One */
+  .project-one-bg {
+    background-image: url('mlbb1.png');
+    background-size: cover;
+    background-position: center;
+  }
+  .project-two-bg {
+    background-image: url(genshin2.jpg);
+    background-size: cover;
+    background-position: center;
+
+  }
+
+.project-three-bg {
+    background-image: url('genshin43.png');
+    background-size: cover;
+    background-position: center;
+}
+
+  /* Contact section */
+  #contact {
+    padding: 40px 20px 60px;
+    text-align: center;
+  }
+  #contact p {
+    margin: px 0;
+    font-size: 1.2rem;
+    color: #ffffff;
+  }
+  .contact-links {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+  .contact-links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #8a64c7;
+    color: white;
+    padding: 12px 22px;
+    border-radius: 30px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: background-color 0.3s ease;
+    font-size: 0.9rem;
+  }
+  .contact-links a:hover {
+    background-color: #b292ff;
+  }
+  .contact-links img.icon {
+    filter: invert(1);
+    width: 20px;
+    height: 20px;
+  }
+
+  /* Footer */
+  footer {
+    text-align: center;
+    padding: 20px 10px;
+    background: rgba(86, 53, 133, 0.7);
+    color: #dbceff;
+    font-size: 0.9rem;
+  }
+  
+  
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    #hero {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    #hero .intro-text {
+      flex: none;
+      max-width: 90%;
+      margin-top: 20px;
+    }
+    #hero .social-links {
+      justify-content: center;
+    }
+    #about .photos-grid {
+      justify-content: center;
+    }
+  }
+  @media (max-width: 600px) {
+    header {
+      flex-direction: column;
+      gap: 15px;
+    }
+    nav ul {
+      gap: 15px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo-name">
+    <img class="logo" src="Untitled-1.jpg" alt="Logo" />
+    <h1>Kennz</h1>
+  </div>
+  <nav>
+    <ul>
+      <li><a href="#hero">Portofolio</a></li>
+      <li><a href="#about">History</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section id="hero" aria-label="Introduction hero section">
+  <div class="logo-container">
+    <img src="cropped-image.png" alt="Your Logo" />
+  </div>
+  <div class="intro-text">
+    <h2>M.Auliya'a Alfan Fathoni</h2>
+    <p class="description">Seseorang yang tidak akan pernah menyerah belajar Coding,Editor Dan Trader,Kembangkan Skill nya bukan Nilai nya</p>
+    <div class="social-links" aria-label="Social media links">
+      <a href="https://www.instagram.com/alfankenzoaul?igsh=MXJ5azhjbW9hY3Fqag==" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+        <img class="icon" src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram logo" /> Instagram
+      </a>
+      <a href="https://www.tiktok.com/@kenzonihgenk8?_t=ZS-8wQQgIafZsf&_r=1" target="_blank" rel="noopener noreferrer" aria-label="Discord">
+        <img class="icon" src="https://cdn-icons-png.flaticon.com/512/3046/3046120.png" alt="Discord logo" /> Discord
+      </a>
+      <a href="https://youtube.com/@afrusher8234?si=1G62HBCTgz33aCsX" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+        <img class="icon" src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube logo" /> YouTube
+      </a>
+    </div>
+  </div>
+</section>
+
+<section id="about" aria-label="About me section">
+    <h3>History</h3>
+    <div class="photos-container">
+      <div class="photos-grid">
+        <figure>
+          <img src="alala.jpg" alt="Photo 1" />
+          <figcaption>Logo Kennz</figcaption>
+        </figure>
+        <figure>
+            <img src="guruku.jpg" alt="Photo 2" />
+            <figcaption>Guru-Guru MTs</figcaption>
+          </figure>
+          <figure>
+            <img src="temanmts.jpg" alt="Photo 3" />
+            <figcaption>Teman MTs</figcaption>
+          </figure>
+          <figure>
+            <img src="raidensjkn.png" alt="Photo 4" />
+            <figcaption>My Waifu Genshin Impact</figcaption>
+          </figure>
+          <figure>
+            <img src="download (1).jpeg" alt="Photo 5" />
+            <figcaption>My Waifu Mobile Legends</figcaption>
+          </figure>
+          <figure>
+            <img src="arle.jpeg" alt="Photo 6" />
+            <figcaption>The Knave</figcaption>
+          </figure>
+        <!-- 5 foto lainnya tetap sama -->
+      </div>
+    </div>
+  </section>
+
+<section id="projects" aria-label="Projects portfolio section">
+  <h3>Projects</h3>
+  <div class="project-list">
+    <article class="project-card project-one-bg" tabindex="0">
+      <h4 class="project-title">Mobile Legends</h4>
+      <p class="project-description"></p>
+      <div class="project-link"><a href="https://github.com/yourname/project-one" target="_blank" rel="noopener noreferrer">View on GitHub</a></div>
+    </article>
+    <article class="project-card project-two-bg" tabindex="0">
+      <h4 class="project-title">Genshin Impact</h4>
+      <p class="project-description"></p>
+      <div class="project-link"><a href="https://github.com/yourname/project-two" target="_blank" rel="noopener noreferrer">View on GitHub</a></div>
+    </article>
+    <article class="project-card project-three-bg" tabindex="0">
+      <h4 class="project-title">Roblox</h4>
+      <p class="project-description"></p>
+      <div class="project-link"><a href="https://github.com/yourname/project-three" target="_blank" rel="noopener noreferrer">View on GitHub</a></div>
+    </article>
+  </div>
+</section>
+
+<section id="contact" aria-label="Contact section">
+  <h3>Media Sosial</h3>
+  <p>You can contact me here</p>
+  <div class="contact-links">
+    <a href="https://discord.gg/VmZNNTS5" target="_blank" rel="noopener noreferrer" aria-label="Discord Profile">
+      <img class="icon" src="https://cdn-icons-png.flaticon.com/512/2111/2111370.png" alt="Discord logo" /> Discord
+    </a>
+    <a href="https://www.tiktok.com/@kenzonihgenk8?_t=ZS-8wQQgIafZsf&_r=1" target="_blank" rel="noopener noreferrer" aria-label="TikTok Profile">
+      <img class="icon" src="https://cdn-icons-png.flaticon.com/512/3046/3046120.png" alt="TikTok logo" /> TikTok
+    </a>
+    <a href="https://www.instagram.com/alfankenzoaul?igsh=MXJ5azhjbW9hY3Fqag==" target="_blank" rel="noopener noreferrer" aria-label="Instagram Profile">
+      <img class="icon" src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram logo" /> Instagram
+    </a>
+  </div>
+</section>
+
+<footer>
+  &copy; Thank you for visiting my portfolio
+</footer>
+
+</body>
+</html>
