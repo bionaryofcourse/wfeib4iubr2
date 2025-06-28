@@ -1,1 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jujutsu Kaisen Login</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+        
+        :root {
+            --cursed-energy: #ff0000;
+            --cursed-energy-dark: #cc0000;
+            --cursed-energy-glow: rgba(255, 0, 0, 0.5);
+        }
+        
+        * {
+            box-sizing: border-box;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', sans-serif;
+            background: url('https://webstatic.hoyoverse.com/upload/op-public/2022/07/13/ecb2849074b3828dcb8cd37e4c3953aa_1593886871239184642.jpeg') no-repeat center center fixed;
+            background-size: cover;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: -1;
+        }
+        
+        .login-container {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 30px;
+            border-radius: 10px;
+            width: 300px;
+            box-shadow: 0 0 20px var(--cursed-energy-glow);
+            border: 1px solid var(--cursed-energy);
+            backdrop-filter: blur(5px);
+            animation: pulse 2s infinite alternate;
+        }
+        
+        @keyframes pulse {
+            from {
+                box-shadow: 0 0 10px var(--cursed-energy-glow);
+            }
+            to {
+                box-shadow: 0 0 20px var(--cursed-energy);
+            }
+        }
+        
+        .login-container h2 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: var(--cursed-energy);
+            font-size: 28px;
+            text-shadow: 0 0 5px var(--cursed-energy);
+            letter-spacing: 1px;
+        }
+        
+        .input-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--cursed-energy);
+            font-weight: bold;
+        }
+        
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--cursed-energy);
+            border-radius: 5px;
+            background: rgba(0, 0, 0, 0.5);
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .input-group input:focus {
+            outline: none;
+            box-shadow: 0 0 8px var(--cursed-energy);
+            transform: scale(1.02);
+        }
+        
+        button {
+            width: 100%;
+            padding: 12px;
+            background: var(--cursed-energy);
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 10px;
+        }
+        
+        button:hover {
+            background: var(--cursed-energy-dark);
+            box-shadow: 0 0 15px var(--cursed-energy);
+            transform: translateY(-2px);
+        }
+        
+        .logo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .logo img {
+            width: 100px;
+            filter: drop-shadow(0 0 5px var(--cursed-energy));
+            transition: all 0.3s ease;
+        }
+        
+        .logo img:hover {
+            transform: scale(1.1);
+            filter: drop-shadow(0 0 10px var(--cursed-energy));
+        }
+        
+        .forgot-password {
+            text-align: right;
+            margin-top: -15px;
+            margin-bottom: 20px;
+        }
+        
+        .forgot-password a {
+            color: #aaa;
+            font-size: 12px;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .forgot-password a:hover {
+            color: var(--cursed-energy);
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="logo">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Jujutsu_Kaisen_logo.svg/1200px-Jujutsu_Kaisen_logo.svg.png" alt="Jujutsu Kaisen Logo">
+        </div>
+        <h2>Domain Expansion</h2>
+        <form id="loginForm">
+            <div class="input-group">
+                <label for="username">Sorcerer Name</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="input-group">
+                <label for="password">Cursed Energy</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="forgot-password">
+                <a href="#">Forgot your technique?</a>
+            </div>
+            <button type="submit">Unleash</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            if(username && password) {
+                // Add loading effect
+                const button = document.querySelector('button');
+                button.innerHTML = 'Chanting...';
+                button.disabled = true;
+                
+                // Simulate domain expansion effect
+                document.querySelector('.login-container').style.animation = 'pulse 0.5s infinite alternate';
+                
+                setTimeout(() => {
+                    localStorage.setItem('isLoggedIn', 'true');
+                    window.location.href = 'dashboard.html';
+                }, 2000);
+            } else {
+                alert('You must enter both sorcerer name and cursed energy!');
+            }
+        });
+    </script>
+</body>
+</html>
 
