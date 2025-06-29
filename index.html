@@ -3,205 +3,347 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jujutsu Kaisen Login</title>
+    <title>Home</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
-        
-        :root {
-            --cursed-energy: #ff0000;
-            --cursed-energy-dark: #cc0000;
-            --cursed-energy-glow: rgba(255, 0, 0, 0.5);
-        }
-        
-        * {
-            box-sizing: border-box;
-        }
-        
         body {
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            font-family: 'Roboto', sans-serif;
-            background: url('https://webstatic.hoyoverse.com/upload/op-public/2022/07/13/ecb2849074b3828dcb8cd37e4c3953aa_1593886871239184642.jpeg') no-repeat center center fixed;
+            background: url('https://wallpapershome.com/images/pages/pic_h/229.jpg') no-repeat center center fixed;
             background-size: cover;
-            height: 100vh;
+            color: white;
+        }
+
+        header {
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            position: relative;
             display: flex;
             justify-content: center;
-            align-items: center;
-            color: white;
-            position: relative;
-            overflow: hidden;
+            flex-wrap: wrap;
         }
-        
-        body::before {
-            content: '';
+
+        nav ul li {
+            margin: 0 15px;
+            position: relative;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+            display: inline-block;
+            font-size: 16px;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        nav ul li a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            border-radius: 5px;
+        }
+
+        .submenu {
+            display: none;
             position: absolute;
-            top: 0;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 10px;
+            border-radius: 5px;
+            z-index: 1000;
+            top: 100%;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.6);
-            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
-        
-        .login-container {
-            background: rgba(0, 0, 0, 0.7);
-            padding: 30px;
-            border-radius: 10px;
-            width: 300px;
-            box-shadow: 0 0 20px var(--cursed-energy-glow);
-            border: 1px solid var(--cursed-energy);
-            backdrop-filter: blur(5px);
-            animation: pulse 2s infinite alternate;
-        }
-        
-        @keyframes pulse {
-            from {
-                box-shadow: 0 0 10px var(--cursed-energy-glow);
-            }
-            to {
-                box-shadow: 0 0 20px var(--cursed-energy);
-            }
-        }
-        
-        .login-container h2 {
-            text-align: center;
-            margin-bottom: 30px;
-            color: var(--cursed-energy);
-            font-size: 28px;
-            text-shadow: 0 0 5px var(--cursed-energy);
-            letter-spacing: 1px;
-        }
-        
-        .input-group {
-            margin-bottom: 20px;
-            position: relative;
-        }
-        
-        .input-group label {
+
+        .submenu.show {
             display: block;
-            margin-bottom: 8px;
-            color: var(--cursed-energy);
-            font-weight: bold;
+            opacity: 1;
         }
-        
-        .input-group input {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid var(--cursed-energy);
+
+        .submenu a {
+            display: block;
+            color: #ffffff;
+            text-decoration: none;
+            padding: 10px 15px;
+            font-size: 14px;
+            transition: background 0.3s;
+            white-space: nowrap;
+        }
+
+        .submenu a:hover {
+            background: rgba(255, 255, 255, 0.2);
             border-radius: 5px;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        section {
+            margin-bottom: 20px;
+            padding: 15px;
             background: rgba(0, 0, 0, 0.5);
-            color: white;
-            transition: all 0.3s ease;
-        }
-        
-        .input-group input:focus {
-            outline: none;
-            box-shadow: 0 0 8px var(--cursed-energy);
-            transform: scale(1.02);
-        }
-        
-        button {
-            width: 100%;
-            padding: 12px;
-            background: var(--cursed-energy);
-            border: none;
             border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px 0;
+            background: rgba(0, 0, 0, 0.7);
             color: white;
-            font-weight: bold;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .copy-button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 5px;
             cursor: pointer;
-            transition: 0.3s;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            transition: background-color 0.3s, transform 0.3s;
             margin-top: 10px;
         }
-        
-        button:hover {
-            background: var(--cursed-energy-dark);
-            box-shadow: 0 0 15px var(--cursed-energy);
-            transform: translateY(-2px);
+
+        .copy-button:hover {
+            background-color: #218838;
+            transform: scale(1.05);
         }
-        
-        .logo {
-            text-align: center;
-            margin-bottom: 20px;
+
+        .copy-button:active {
+            transform: scale(0.95);
         }
-        
-        .logo img {
-            width: 100px;
-            filter: drop-shadow(0 0 5px var(--cursed-energy));
-            transition: all 0.3s ease;
+
+        textarea {
+            width: 100%;
+            height: 30px;
+            resize: none;
+            background-color: rgba(255, 255, 255, 0.8);
+            color: black;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 5px;
         }
-        
-        .logo img:hover {
-            transform: scale(1.1);
-            filter: drop-shadow(0 0 10px var(--cursed-energy));
+
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: row;
+                justify-content: space-around;
+            }
+
+            nav ul li {
+                margin: 10px 0;
+            }
+
+            nav ul li a {
+                font-size: 14px;
+            }
+
+            section {
+                padding: 10px;
+            }
         }
-        
-        .forgot-password {
-            text-align: right;
-            margin-top: -15px;
-            margin-bottom: 20px;
+
+        @media (max-width: 480px) {
+            nav ul li a {
+                font-size: 12px;
+            }
+
+            main {
+                padding: 10px;
+            }
         }
-        
-        .forgot-password a {
-            color: #aaa;
-            font-size: 12px;
-            text-decoration: none;
-            transition: color 0.3s;
+
+        .image-gallery {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            opacity: 0;
+            animation: fadeIn 1s forwards;
         }
-        
-        .forgot-password a:hover {
-            color: var(--cursed-energy);
+
+        .image-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 10px;
+        }
+
+        .image-container img {
+            max-width: 200px;
+            height: auto;
+            border-radius: 5px;
+            transition: transform 0.3s;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes neon {
+            0% { box-shadow: 0 0 10px rgba(255, 255, 255, 0.7); }
+            25% { box-shadow: 0 0 30px rgba(128, 0, 128, 1); }
+            50% { box-shadow: 0 0 30px rgba(0, 0, 255, 1); }
+            75% { box-shadow: 0 0 30px rgba(0, 255, 0, 1); }
+            100% { box-shadow: 0 0 10px rgba(255, 255, 255, 0.7); }
+        }
+
+        .image-container img:hover {
+            transform: scale(1.05);
+            animation: neon 1.5s infinite;
         }
     </style>
 </head>
 <body>
-    <div class="login-container">
-        <div class="logo">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6e/Jujutsu_Kaisen_logo.svg/1200px-Jujutsu_Kaisen_logo.svg.png" alt="Jujutsu Kaisen Logo">
-        </div>
-        <h2>Domain Expansion</h2>
-        <form id="loginForm">
-            <div class="input-group">
-                <label for="username">Sorcerer Name</label>
-                <input type="text" id="username" name="username" required>
-            </div>
-            <div class="input-group">
-                <label for="password">Cursed Energy</label>
-                <input type="password" id="password" name="password" required>
-            </div>
-            <div class="forgot-password">
-                <a href="#">Forgot your technique?</a>
-            </div>
-            <button type="submit">Unleash</button>
-        </form>
-    </div>
+    <header>
+        <h1>Kennz Web</h1>
+        <nav>
+            <ul>
+                <li><a href="home.html">Home</a></li>
+                <li>
+                    <a href="#" id="executor-toggle">Executor</a>
+                    <div class="submenu" id="executor-submenu">
+                        <a href="Fluxus.html" target="_blank">Fluxus</a>
+                        <a href="Delta.html" target="_blank">Delta</a>
+                        <a href="ArceusX.html" target="_blank">Arceus X</a>
+                        </div>
+                </li>
+                <li>
+                    <a href="#" id="script-toggle">Script</a>
+                    <div class="submenu" id="script-submenu">
+                        <a href="https://www.roblox.com/id/games/126884695634066/Grow-a-Garden" target="_blank">Grow a Garden</a>
+                        <a href="https://robloxscripts.com/blox-fruit-script/" target="_blank">Blox Fruit</a>
+                        <a href="https://scriptblox.com/script/Dead-Rails-Dead-Rails-GUI-Script-***" target="_blank">Dead Rails</a>
+                        <a href="https://scriptblox.com/script/Fishing-Simulator-Fisch-Script-***" target="_blank">Fisch</a>
+                        <a href="https://scriptblox.com/script/Pet-Simulator-X-Pet-Simulator-X-Script-***" target="_blank">Pet Simulator</a>
+                        <a href="https://scriptblox.com/script/Anime-Tower-Defense-Anime-Tower-Defenders-Script-***" target="_blank">Anime Tower Defenders</a>
+                        <a href="https://scriptblox.com/script/High-And-Jump-Script-***" target="_blank">High and Jump</a>
+                    </div>
+                </li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
 
+    <main>
+        <section id="images">
+            <h2>HOME</h2>
+            <div class="image-gallery">
+                <div class="image-container">
+                    <img src="https://i.pinimg.com/736x/d9/e3/6e/d9e36e4a1dd04a53b17733935c3db95c.jpg" alt="Image 1">
+                    <p>Grow A Garden</p>
+                    <button class="copy-button" onclick="copyToClipboard()">Get Script</button>
+                </div>
+                <div class="image-container">
+                    <img src="https://i.pinimg.com/736x/06/71/7e/06717ec114fcb2b7c87de350c743d801.jpg" alt="Image 2">
+                    <p>Blox Fruit</p>
+                    <button class="copy-button" onclick="copyToClipboard()">Get Script</button>
+                </div>
+                <div class="image-container">
+                    <img src="https://i.pinimg.com/736x/0a/86/9e/0a869e365528b1daa0af49b5ca7eac6e.jpg" alt="Image 3">
+                    <p>Dead Rails</p>
+                    <button class="copy-button" onclick="copyToClipboard()">Get Script</button>
+                </div>
+                <div class="image-container">
+                    <img src="https://i.pinimg.com/736x/3a/b4/95/3ab495c3c8cf695a9176c478b87d74d3.jpg" alt="Image 4">
+                    <p>Climb And Jump</p>
+                    <button class="copy-button" onclick="copyToClipboard()">Get Script</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2>Contact Us</h2>
+            <p>Feel free to reach out with any questions!</p>
+            <form id="contact-form">
+                <label for="name">Name:</label><br>
+                <input type="text" id="name" name="name" required><br><br>
+                <label for="email">Email:</label><br>
+                <input type="email" id="email" name="email" required><br><br>
+                <label for="message">Message:</label><br>
+                <textarea id="message" name="message" rows="4" required></textarea><br><br>
+                <button type="submit">Send Message</button>
+            </form>
+            <div id="response" style="margin-top: 20px; color: yellow;"></div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 Kennz Web. All rights reserved.</p>
+    </footer>
+
+    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
     <script>
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-            
-            if(username && password) {
-                // Add loading effect
-                const button = document.querySelector('button');
-                button.innerHTML = 'Chanting...';
-                button.disabled = true;
-                
-                // Simulate domain expansion effect
-                document.querySelector('.login-container').style.animation = 'pulse 0.5s infinite alternate';
-                
-                setTimeout(() => {
-                    localStorage.setItem('isLoggedIn', 'true');
-                    window.location.href = 'dashboard.html';
-                }, 2000);
-            } else {
-                alert('You must enter both sorcerer name and cursed energy!');
+        (function(){
+            emailjs.init("YOUR_USER_ID");
+        })();
+
+        // Toggle submenu
+        document.getElementById('script-toggle').addEventListener('click', function(event) {
+            event.preventDefault();
+            document.getElementById('script-submenu').classList.toggle('show');
+            document.getElementById('executor-submenu').classList.remove('show');
+        });
+
+        document.getElementById('executor-toggle').addEventListener('click', function(event) {
+            event.preventDefault();
+            document.getElementById('executor-submenu').classList.toggle('show');
+            document.getElementById('script-submenu').classList.remove('show');
+        });
+
+        // Close submenus when clicking outside
+        window.addEventListener('click', function(event) {
+            if (!event.target.matches('#script-toggle') && !event.target.closest('#script-submenu')) {
+                document.getElementById('script-submenu').classList.remove('show');
+            }
+            if (!event.target.matches('#executor-toggle') && !event.target.closest('#executor-submenu')) {
+                document.getElementById('executor-submenu').classList.remove('show');
             }
         });
+
+        // Form submission
+        document.getElementById('contact-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+
+            emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", {
+                from_name: name,
+                from_email: email,
+                message: message
+            })
+            .then(function(response) {
+                document.getElementById('response').innerHTML = "Pesan berhasil dikirim!";
+                document.getElementById('contact-form').reset();
+            }, function(error) {
+                document.getElementById('response').innerHTML = "Gagal mengirim pesan. Silakan coba lagi.";
+            });
+        });
+
+        function copyToClipboard() {
+            const textarea = document.createElement('textarea');
+            textarea.value = 'Script akan dikirim ke clipboard';
+            document.body.appendChild(textarea);
+            textarea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textarea);
+            alert('Script copied to clipboard!');
+        }
     </script>
 </body>
 </html>
-
