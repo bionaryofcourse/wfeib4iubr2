@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KENWEB</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        body {
+            background: url('https://i.pinimg.com/736x/01/cb/ff/01cbff2acdcf8c237fd4f0ba52fec94d.jpg');
+            color: white;
+        }
+
+        header {
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+            position: relative;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+            display: inline-block;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+
+        nav ul li a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+        }
+
+        .submenu {
+            display: none;
+            position: absolute;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 10px;
+            border-radius: 5px;
+            z-index: 1000;
+            top: 100%;
+            left: 0;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .submenu.show {
+            display: block;
+            opacity: 1;
+        }
+
+        .submenu a {
+            display: block;
+            padding: 10px 15px;
+            font-size: 14px;
+        }
+
+        .submenu a:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        section {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            min-height: 300px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px 0;
+            background: rgba(0, 0, 0, 0.7);
+            position: relative;
+            width: 100%;
+        }
+
+        .copy-button {
+            background-color: #6a1b9a;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 200px;
+            height: 40px;
+            margin-top: 15px;
+        }
+
+        .copy-button:hover {
+            background-color: #9c27b0;
+            transform: scale(1.05);
+        }
+
+        .copy-button:active {
+            transform: scale(0.95);
+        }
+
+        .image-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .image-container img {
+            width: 300px;
+            height: auto;
+            border-radius: 5px;
+            transition: all 0.3s;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+
+        .image-container p {
+            font-weight: 700;
+            font-size: 18px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin: 15px 0;
+            text-shadow: 0 0 10px rgba(255,255,255,0.5);
+        }
+
+        @keyframes neon {
+            0%, 100% { box-shadow: 0 0 10px rgba(255, 255, 255, 0.7); }
+            25% { box-shadow: 0 0 30px rgba(128, 0, 128, 1); }
+            50% { box-shadow: 0 0 30px rgba(0, 0, 255, 1); }
+            75% { box-shadow: 0 0 30px rgba(0, 255, 0, 1); }
+        }
+
+        .image-container img:hover {
+            transform: scale(1.05);
+            animation: neon 1.5s infinite;
+        }
+
+        h1, h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: row;
+                justify-content: space-around;
+            }
+            nav ul li {
+                margin: 10px 0;
+            }
+            section {
+                padding: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            nav ul li a {
+                font-size: 12px;
+            }
+            main {
+                padding: 10px;
+            }
+            .image-container img {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Kennz Web</h1>
+        <nav>
+            <ul>
+                <li><a href="home.html">Home</a></li>
+                <li>
+                    <a href="#" id="executor-toggle">Executor</a>
+                    <div class="submenu" id="executor-submenu">
+                        <a href="Fluxus.html">Fluxus</a>
+                        <a href="Delta.html">Delta</a>
+                        <a href="ArceusX.html">Arceus X</a>
+                    </div>
+                </li>
+                <li>
+                    <a href="#" id="script-toggle">Script</a>
+                    <div class="submenu" id="script-submenu">
+                        <a href="https://www.roblox.com/id/games/126884695634066/Grow-a-Garden">Grow a Garden</a>
+                        <a href="#blox-fruit">Blox Fruit</a>
+                        <a href="#dead-rails">Dead Rails</a>
+                        <a href="#fisch">Fisch</a>
+                        <a href="#pet-simulator">Pet Simulator</a>
+                        <a href="#anime-tower-defenders">Anime Tower Defenders</a>
+                        <a href="#high-and-jump">High and Jump</a>
+                        <li><a href="#home">Contact</a></li>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="images">
+            <h2>Fluxus</h2>
+            <div class="image-container">
+                <img src="fluxustbg.png" alt="Delta Executor">
+                <p>Fluxus for android</p>
+                <button class="copy-button" onclick="window.location.href='tombol2.html'">Download</button>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 Kennz Web. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Toggle submenu visibility
+        document.getElementById('script-toggle').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('script-submenu').classList.toggle('show');
+        });
+
+        document.getElementById('executor-toggle').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('executor-submenu').classList.toggle('show');
+        });
+
+        // Close submenus when clicking outside
+        window.addEventListener('click', function(e) {
+            if (!e.target.matches('#script-toggle')) {
+                document.getElementById('script-submenu').classList.remove('show');
+            }
+            if (!e.target.matches('#executor-toggle')) {
+                document.getElementById('executor-submenu').classList.remove('show');
+            }
+        });
+    </script>
+</body>
+</html>

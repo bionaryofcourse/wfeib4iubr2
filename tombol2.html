@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>link mf fluxus</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* CSS Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #434343, #000000);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .get-script-section {
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 15px;
+            padding: 60px 30px 40px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            margin-top: 50px;
+        }
+
+        .logo-container {
+            position: absolute;
+            top: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 5px solid rgba(0, 0, 0, 0.7);
+            box-shadow: 
+                0 0 15px 5px rgba(255, 255, 255, 0.3),
+                0 4px 20px rgba(0, 0, 0, 0.6);
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .logo-container:hover {
+            transform: translateX(-50%) scale(1.05);
+            box-shadow: 
+                0 0 20px 8px rgba(255, 255, 255, 0.4),
+                0 6px 25px rgba(0, 0, 0, 0.7);
+        }
+
+        .logo {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(1.05) contrast(1.1);
+        }
+
+        h1 {
+            color: #ffffff;
+            margin-bottom: 30px;
+            font-size: 2.5rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .button-group {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .btn {
+            padding: 15px 35px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 250px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .btn-subscribe {
+            background-color: #FF0000;
+            color: white;
+            font-size: 1.3rem;
+            box-shadow: 0 4px 8px rgba(255, 0, 0, 0.3);
+        }
+
+        .btn-subscribe:hover {
+            background-color: #CC0000;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(255, 0, 0, 0.4);
+        }
+
+        .btn-subscribe.subscribed {
+            background-color: #606060;
+        }
+
+        .btn-like {
+            background-color: #065FD4;
+            color: white;
+            font-size: 1.3rem;
+            box-shadow: 0 4px 8px rgba(6, 95, 212, 0.3);
+        }
+
+        .btn-like:hover {
+            background-color: #0549a8;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(6, 95, 212, 0.4);
+        }
+
+        .btn-like.liked {
+            background-color: #065FD4;
+        }
+
+        /* Modified GET button with blue-to-pink gradient */
+        .btn-get {
+            background: linear-gradient(90deg, #6b8cff, #ff6b9d);
+            color: white;
+            pointer-events: none;
+            opacity: 0.7;
+            margin-top: 10px;
+            font-size: 1.2rem;
+            padding: 15px 35px;
+            border: none;
+            border-radius: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 250px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-get.active {
+            opacity: 1;
+            pointer-events: auto;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-get.active:hover {
+            background: linear-gradient(90deg, #5b7cff, #ff5b8d);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+        }
+
+        .icon {
+            margin-right: 12px;
+            font-size: 1.5rem;
+        }
+
+        .youtube-icon {
+            color: white;
+            margin-right: 12px;
+            font-size: 1.8rem;
+        }
+
+        .like-icon {
+            color: white;
+            margin-right: 12px;
+            font-size: 1.8rem;
+        }
+
+        .status-text {
+            margin-top: 10px;
+            color: #aaaaaa;
+            font-size: 0.9rem;
+        }
+
+        .loading-indicator {
+            color: white;
+            font-size: 1rem;
+            margin-bottom: 10px;
+            font-weight: bold;
+            height: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <section class="get-script-section">
+            <div class="logo-container">
+                <img src="https://yt3.googleusercontent.com/WG_44iYY2FiplYFZ5h6JR8GkGZCMKepltEFMkSUkjRXaXn1wu9gJD5fWlRu2dMrxtX8R6aKx=s160-c-k-c0x00ffffff-no-rj" alt="Logo" class="logo">
+            </div>
+            <h1>GET SCRIPT</h1>
+            
+            <div class="button-group">
+                <a href="https://youtube.com/@afrusher8234?si=RgKRVzuWVNKOQSgY" target="_blank" id="subscribeBtn" class="btn btn-subscribe">
+                    <i class="fab fa-youtube youtube-icon"></i>
+                    <span>Subscribe</span>
+                </a>
+                
+                <a href="https://youtu.be/5Rd5zJYv06Q?si=QOqmu_c6h9bNGpok" target="_blank" id="likeBtn" class="btn btn-like">
+                    <i class="fas fa-thumbs-up like-icon"></i>
+                    <span>Like</span>
+                </a>
+                
+                <div id="statusText" class="status-text">Subscribe dan Like untuk membuka tombol GET</div>
+                
+                <div id="loadingIndicator" class="loading-indicator">0/2</div>
+                
+                <button id="getBtn" class="btn btn-get">
+                    <span class="icon">↓</span>
+                    <span>GET</span>
+                </button>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        const subscribeBtn = document.getElementById('subscribeBtn');
+        const likeBtn = document.getElementById('likeBtn');
+        const getBtn = document.getElementById('getBtn');
+        const statusText = document.getElementById('statusText');
+        const loadingIndicator = document.getElementById('loadingIndicator');
+
+        let isSubscribed = false;
+        let isLiked = false;
+        let progress = 0;
+
+        function updateProgress() {
+            progress = (isSubscribed ? 1 : 0) + (isLiked ? 1 : 0);
+            loadingIndicator.textContent = `${progress}/2`;
+        }
+
+        // Function to handle button clicks and redirect
+        function handleButtonClick(button, type) {
+            if (type === 'subscribe') {
+                isSubscribed = true;
+                subscribeBtn.classList.add('subscribed');
+                subscribeBtn.innerHTML = '<i class="fab fa-youtube youtube-icon"></i><span>Subscribed</span>';
+            } else {
+                isLiked = true;
+                likeBtn.classList.add('liked');
+                likeBtn.innerHTML = '<i class="fas fa-thumbs-up like-icon"></i><span>Liked</span>';
+            }
+            
+            updateProgress();
+            checkButtons();
+            
+            // Small delay to allow visual feedback before redirect
+            setTimeout(() => {
+                if (type === 'subscribe') {
+                    window.open('https://youtube.com/@afrusher8234?si=RgKRVzuWVNKOQSgY', '_blank');
+                } else {
+                    window.open('https://youtu.be/5Rd5zJYv06Q?si=QOqmu_c6h9bNGpok', '_blank');
+                }
+            }, 300);
+        }
+
+        subscribeBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            handleButtonClick(this, 'subscribe');
+        });
+
+        likeBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            handleButtonClick(this, 'like');
+        });
+
+        getBtn.addEventListener('click', function() {
+            // Buka link di tab baru ketika tombol GET diklik
+            window.open('https://www.mediafire.com/file/suzrkym511586ex/Fluxus-v678.apk/file', '_blank'); // Ganti dengan URL tujuan Anda
+        });
+
+        function checkButtons() {
+            if (isSubscribed && isLiked) {
+                getBtn.classList.add('active');
+                statusText.textContent = 'Tombol GET sudah bisa digunakan!';
+                statusText.style.color = '#2ecc71';
+            } else {
+                getBtn.classList.remove('active');
+                statusText.textContent = 'Subscribe dan Like untuk membuka tombol GET';
+                statusText.style.color = '#aaaaaa';
+            }
+        }
+    </script>
+</body>
+</html>
