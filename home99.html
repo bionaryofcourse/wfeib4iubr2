@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Section Layout</title>
+    <style>
+        /* Search Components */
+        .search-container {
+            display: flex;
+            margin: 20px auto 30px;
+            max-width: 500px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 12px 20px;
+            border: 1px solid rgba(0,0,0,0.1);
+            border-radius: 25px;
+            font-size: 16px;
+            outline: none;
+            background: rgba(255,255,255,0.9);
+        }
+
+        .search-btn {
+            padding: 12px 20px;
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            color: white;
+            border: none;
+            border-radius: 0 25px 25px 0;
+            cursor: pointer;
+            font-weight: 500;
+        }
+
+        /* Back Button */
+        .back-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 8px 16px;
+            background: #f8f9fa;
+            color: #2c3e50;
+            text-decoration: none;
+            border-radius: 20px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.1);
+        }
+        
+        .back-btn:hover {
+            background: #e9ecef;
+            transform: translateX(-3px);
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4e9f2 100%);
+            color: #333;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+        
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        /* Section Header */
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-header h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            border-radius: 2px;
+            animation: underlineGrow 0.8s ease forwards;
+        }
+
+        @keyframes underlineGrow {
+            from { width: 0; opacity: 0; }
+            to { width: 80px; opacity: 1; }
+        }
+        
+        .section-header p {
+            color: #7f8c8d;
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* Cards Grid */
+        .cards-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .card {
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            opacity: 1;
+            transform: scale(1);
+        }
+        
+        .card.hidden {
+            opacity: 0;
+            transform: scale(0.9);
+            height: 0;
+            margin: -15px 0;
+            padding: 0;
+            border: 0;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* Card Image */
+        .card-image {
+            height: 220px;
+            overflow: hidden;
+        }
+        
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .card:hover .card-image img {
+            transform: scale(1.05);
+        }
+        
+        /* Card Content */
+        .card-content {
+            padding: 25px;
+        }
+        
+        .card-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+        
+        .card-content p {
+            color: #7f8c8d;
+            margin-bottom: 20px;
+        }
+        
+        /* Button */
+        .btn {
+            display: inline-block;
+            padding: 12px 28px;
+            background: linear-gradient(to right, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(37, 117, 252, 0.3);
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(37, 117, 252, 0.4);
+            background: linear-gradient(to right, #6a11cb 10%, #2575fc 100%);
+        }
+        
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .section-header h2 {
+                font-size: 2rem;
+            }
+            
+            .cards-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="javascript:history.back()" class="back-btn">← Back</a>
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Search Script..." class="search-input">
+        </div>
+        <div class="section-header">
+            <h2>99 NIGHTS</h2>
+            <p>Kalian bisa request Script di Youtube YamadaAoshi</p>
+        </div>
+        
+        <div class="cards-container">
+            <!-- Card 1 -->
+            <div class="card">
+                <div class="card-image">
+                        <img src="speedhub.jpg" alt="Business team collaborating in a modern conference room with glass walls and whiteboards" />
+                </div>
+                <div class="card-content">
+                    <h3>Speed Hub  99 Nights</h3>
+                    <p>15 Agustus 2025 Youtube:@YamadaAoshi</p>
+                    <a href="tombol991.html" class="btn">Get Script</a>
+                </div>
+            </div>
+            
+            <!-- Card 2 -->
+            <div class="card">
+                <div class="card-image">
+                    <img src="vexop.jpg" alt="Digital marketing concept with colorful social media icons floating above a smartphone" />
+                </div>
+                <div class="card-content">
+                    <h3>VEX OP 99 Nights</h3>
+                    <p>14 Agustus 2025  Youtube:@YamadaAoshi</p>
+                    <a href="tombol992.html" class="btn">Get Script</a>
+                </div>
+            </div>
+            
+            <!-- Card 3 -->
+            <div class="card">
+                <div class="card-image">
+                    <img src="bonk.jpg" alt="Web development code on a computer screen with colorful syntax highlighting" />
+                </div>
+                <div class="card-content">
+                    <h3>Bonk hub 99 Nights</h3>
+                    <p>14 Agustus 2025  Youtube:@YamadaAoshi</p>
+                    <a href="tombol993.html" class="btn">Get Script</a>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-image">
+                    <img src="linux.jpg" alt="Digital marketing concept with colorful social media icons floating above a smartphone" />
+                </div>
+                <div class="card-content">
+                    <h3>Linux Hub 99 Nights</h3>
+                    <p>15 Agustus 2025  Youtube:@YamadaAoshi</p>
+                    <a href="tombol994.html" class="btn">Get Script</a>
+                </div>
+            </div>
+            
+             <div class="card">
+                <div class="card-image">
+                    <img src="Ef.jpg" alt="Web development code on a computer screen with colorful syntax highlighting" />
+                </div>
+                <div class="card-content">
+                    <h3>EF Hub 99 Nights</h3>
+                    <p>15 Agustus 2025  Youtube:@YamadaAoshi</p>
+                    <a href="tombol995.html" class="btn">Get Script</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('searchInput').addEventListener('input', function() {
+            const searchTerm = this.value.toLowerCase();
+            const cards = document.querySelectorAll('.card');
+            
+            cards.forEach(card => {
+                const title = card.querySelector('h3').textContent.toLowerCase();
+                const desc = card.querySelector('p').textContent.toLowerCase();
+                
+                if(title.includes(searchTerm) || desc.includes(searchTerm)) {
+                    card.classList.remove('hidden');
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
