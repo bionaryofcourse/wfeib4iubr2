@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Halaman dengan Tombol Sosial</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            padding: 0;
+            background: linear-gradient(-45deg, #0a0a0a, #1a1a2e, #16213e, #0f3460);
+            background-size: 400% 400%;
+            animation: gradientShift 15s ease infinite;
+            color: #ffffff;
+            min-height: 100vh;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        /* Background Particles */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 20s infinite linear;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(0) translateX(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            z-index: 1;
+        }
+        
+        /* Styles untuk Logo */
+        .logo-container {
+            margin: 0 0 50px 0;
+            padding: 20px;
+        }
+        .logo {
+            font-size: 4rem;
+            margin-bottom: 15px;
+            animation: logoGlow 3s ease-in-out infinite;
+            filter: drop-shadow(0 0 20px rgba(0, 162, 255, 0.5));
+        }
+        .logo-text {
+            font-size: 2.5rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #00a2ff, #00ffaa, #00a2ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            background-size: 200% 100%;
+            animation: gradientShift 3s ease-in-out infinite;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+        .logo-subtitle {
+            color: #b0b0b0;
+            font-size: 1.1rem;
+            margin-top: 5px;
+            opacity: 0.8;
+        }
+        @keyframes logoGlow {
+            0%, 100% { 
+                transform: scale(1) rotate(0deg);
+                filter: drop-shadow(0 0 20px rgba(0, 162, 255, 0.5));
+            }
+            50% { 
+                transform: scale(1.05) rotate(5deg);
+                filter: drop-shadow(0 0 30px rgba(0, 162, 255, 0.8));
+            }
+        }
+
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+        button {
+            padding: 16px 32px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+            border-radius: 12px;
+            color: white;
+            width: 280px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        button:hover:not(:disabled) {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+        }
+        button:hover:not(:disabled)::before {
+            left: 100%;
+        }
+        button:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        }
+        .subscribe { 
+            background: linear-gradient(45deg, #ff3333, #ff6666);
+            border: 1px solid #ff4444;
+        }
+        .like { 
+            background: linear-gradient(45deg, #3366cc, #6699ff);
+            border: 1px solid #4477dd;
+        }
+        .instagram { 
+            background: linear-gradient(45deg, #cc3366, #ff6699);
+            border: 1px solid #dd4477;
+        }
+        .get-in-script { 
+            background: linear-gradient(45deg, #00cc66, #00ff88);
+            border: 1px solid #00dd77;
+            margin-top: 20px;
+        }
+        .status-indicator {
+            margin-top: 30px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+        .status-text {
+            font-size: 14px;
+            color: #888;
+            margin-bottom: 10px;
+        }
+        .progress-bar {
+            height: 6px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        .progress {
+            height: 100%;
+            background: linear-gradient(45deg, #00cc66, #00ff88);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        /* Animasi Checkmark */
+        .checkmark {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.7);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+        
+        .checkmark-icon {
+            width: 20px;
+            height: 20px;
+            position: relative;
+        }
+        
+        .checkmark-icon:after {
+            content: '';
+            position: absolute;
+            left: 6px;
+            top: 2px;
+            width: 8px;
+            height: 14px;
+            border: solid #00cc66;
+            border-width: 0 3px 3px 0;
+            transform: rotate(45deg);
+        }
+        
+        .button-clicked {
+            position: relative;
+        }
+        
+        .button-clicked .checkmark {
+            animation: checkmarkPop 0.6s ease forwards;
+        }
+        
+        .button-clicked .button-text {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        @keyframes checkmarkPop {
+            0% {
+                transform: translate(-50%, -50%) scale(0);
+                opacity: 0;
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.2);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* Styles untuk Text Box */
+        .text-container {
+            margin-top: 40px;
+            padding: 25px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            max-width: 700px;
+            display: none;
+            animation: fadeIn 0.8s ease forwards;
+        }
+        
+        .text-container h3 {
+            margin-top: 0;
+            color: #00cc66;
+            font-size: 1.5rem;
+        }
+        
+        .copy-text {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: left;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            max-height: 200px;
+            overflow-y: auto;
+            margin-bottom: 20px;
+            color: #e0e0e0;
+            user-select: text;
+            -webkit-user-select: text;
+            -moz-user-select: text;
+            -ms-user-select: text;
+        }
+        
+        .copy-button {
+            background: linear-gradient(45deg, #3366cc, #6699ff);
+            border: none;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin: 0 auto;
+        }
+        
+        .copy-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(51, 102, 204, 0.4);
+        }
+        
+        .copy-button.copied {
+            background: linear-gradient(45deg, #00cc66, #00ff88);
+        }
+        
+        .copy-button.copied::after {
+            content: "✓ Disalin!";
+        }
+        
+        .text-unlock-message {
+            margin-top: 20px;
+            color: #ffcc00;
+            font-size: 1.1rem;
+            font-weight: bold;
+            animation: pulse 2s infinite;
+        }
+        
+        /* Styles untuk Highlight Area */
+        .highlight-area {
+            position: relative;
+            margin-top: 50px;
+        }
+        
+        .highlight-area::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border: 2px solid #00cc66;
+            border-radius: 20px;
+            animation: highlightPulse 2s infinite;
+            pointer-events: none;
+        }
+        
+        @keyframes highlightPulse {
+            0%, 100% {
+                box-shadow: 0 0 20px rgba(0, 204, 102, 0.3);
+                border-color: #00cc66;
+            }
+            50% {
+                box-shadow: 0 0 40px rgba(0, 204, 102, 0.7);
+                border-color: #00ff88;
+            }
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes pulse {
+            0% { opacity: 0.6; }
+            50% { opacity: 1; }
+            100% { opacity: 0.6; }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 3rem;
+            }
+            .logo-text {
+                font-size: 2rem;
+            }
+            .text-container {
+                padding: 15px;
+            }
+            .copy-text {
+                font-size: 12px;
+            }
+        }
+        
+        /* Success Message */
+        .success-message {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 204, 102, 0.9);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            display: none;
+            animation: slideDown 0.5s ease forwards;
+        }
+        
+        @keyframes slideDown {
+            from {
+                top: -100px;
+                opacity: 0;
+            }
+            to {
+                top: 20px;
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Success Message -->
+    <div class="success-message" id="successMessage">
+        🎉 Selamat! Akses premium diberikan. Anda sekarang dapat menyalin kode script game eksklusif.
+    </div>
+
+    <!-- Background Particles -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Logo Section -->
+    <div class="logo-container">
+        <div class="logo">🎮</div>
+        <div class="logo-text">GAME</div>
+        <div class="logo-subtitle">Subscribe • Like • Instagram</div>
+    </div>
+
+    <div class="container">
+        <div class="buttons">
+            <button class="subscribe" id="subscribeBtn">
+                <span class="button-text">Subscribe</span>
+                <div class="checkmark">
+                    <div class="checkmark-icon"></div>
+                </div>
+            </button>
+            <button class="like" id="likeBtn">
+                <span class="button-text">Like</span>
+                <div class="checkmark">
+                    <div class="checkmark-icon"></div>
+                </div>
+            </button>
+            <button class="instagram" id="instagramBtn">
+                <span class="button-text">Instagram</span>
+                <div class="checkmark">
+                    <div class="checkmark-icon"></div>
+                </div>
+            </button>
+            <button class="get-in-script" id="getInScriptBtn" disabled>
+                Get in Script
+            </button>
+        </div>
+
+        <div class="status-indicator">
+            <div class="status-text" id="statusText">Progress: 0/3 tombol diklik</div>
+            <div class="progress-bar">
+                <div class="progress" id="progressBar"></div>
+            </div>
+        </div>
+        
+        <!-- Area Highlight untuk Text Container -->
+        <div class="highlight-area">
+            <!-- Text Container yang akan muncul setelah mengklik Get in Script -->
+            <div class="text-container" id="textContainer">
+                <h3>🎉 Kode Script Game Eksklusif</h3>
+                <div class="copy-text" id="copyText">
+loadstring(game:HttpGet("https://raw.githubusercontent.com/elainaceles/SoraHub/refs/heads/main/fishhit.lua"))()
+                </div>
+                <button class="copy-button" id="copyButton">
+                    📋 Salin Kode Script
+                </button>
+            </div>
+        </div>
+        
+        <div class="text-unlock-message" id="unlockMessage">
+            Bayar Pake Subscribe
+        </div>
+    </div>
+
+    <script>
+        // Fungsi untuk membuat partikel latar belakang
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 30;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Ukuran acak
+                const size = Math.random() * 10 + 5;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                // Posisi acak
+                particle.style.left = `${Math.random() * 100}vw`;
+                particle.style.top = `${Math.random() * 100}vh`;
+                
+                // Animasi dengan delay acak
+                particle.style.animationDelay = `${Math.random() * 20}s`;
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Variabel untuk melacak klik tombol
+        let clickedButtons = {
+            subscribe: false,
+            like: false,
+            instagram: false
+        };
+
+        // Fungsi untuk menangani klik tombol
+        function clickButton(buttonType) {
+            if (!clickedButtons[buttonType]) {
+                clickedButtons[buttonType] = true;
+                
+                // Tambahkan kelas untuk animasi
+                const button = document.getElementById(buttonType + 'Btn');
+                button.classList.add('button-clicked');
+                
+                // Arahkan ke halaman yang sesuai berdasarkan tombol yang diklik
+                setTimeout(() => {
+                    switch(buttonType) {
+                        case 'subscribe':
+                            window.open('https://www.youtube.com/@YamadaAoshi', '_blank');
+                            break;
+                        case 'like':
+                            window.open('https://youtu.be/5Rd5zJYv06Q?si=0nbJsXMFxZGiqvoS', '_blank');
+                            break;
+                        case 'instagram':
+                            window.open('https://www.instagram.com/yamadaaoshi?igsh=MXJ5azhjbW9hY3Fqag==', '_blank');
+                            break;
+                    }
+                }, 600); // Delay untuk menampilkan animasi terlebih dahulu
+                
+                updateProgress();
+                checkUnlock();
+            }
+        }
+
+        // Fungsi untuk memperbarui progress bar
+        function updateProgress() {
+            const count = Object.values(clickedButtons).filter(Boolean).length;
+            const progress = (count / 3) * 100;
+            
+            document.getElementById('progressBar').style.width = `${progress}%`;
+            document.getElementById('statusText').textContent = `Progress: ${count}/3 tombol diklik`;
+        }
+
+        // Fungsi untuk memeriksa dan membuka kunci tombol "Get in Script"
+        function checkUnlock() {
+            if (clickedButtons.subscribe && clickedButtons.like && clickedButtons.instagram) {
+                const getInScriptBtn = document.getElementById('getInScriptBtn');
+                getInScriptBtn.disabled = false;
+                
+                // Efek khusus ketika tombol terbuka
+                getInScriptBtn.style.animation = 'pulse 2s infinite';
+                
+                // Tambahkan style untuk animasi pulse
+                const style = document.createElement('style');
+                style.textContent = `
+                    @keyframes pulse {
+                        0% { box-shadow: 0 0 0 0 rgba(0, 204, 102, 0.7); }
+                        70% { box-shadow: 0 0 0 15px rgba(0, 204, 102, 0); }
+                        100% { box-shadow: 0 0 0 0 rgba(0, 204, 102, 0); }
+                    }
+                `;
+                document.head.appendChild(style);
+
+                // Update logo ketika semua tombol diklik
+                document.querySelector('.logo').textContent = '🎉';
+                document.querySelector('.logo-text').textContent = 'ACCESS GRANTED!';
+                document.querySelector('.logo-subtitle').textContent = 'Klik "Get in Script" untuk melanjutkan';
+                
+                // Sembunyikan pesan unlock
+                document.getElementById('unlockMessage').style.display = 'none';
+            }
+        }
+
+        // Fungsi untuk membuka teks yang bisa disalin
+        function unlockText() {
+            const textContainer = document.getElementById('textContainer');
+            textContainer.style.display = 'block';
+            
+            // Animasi tambahan untuk Get in Script
+            const getInScriptBtn = document.getElementById('getInScriptBtn');
+            getInScriptBtn.textContent = '✓ Akses Diberikan';
+            getInScriptBtn.style.background = 'linear-gradient(45deg, #00cc66, #00ff88)';
+            getInScriptBtn.style.animation = 'none';
+            
+            // Tampilkan pesan sukses tanpa alert
+            const successMessage = document.getElementById('successMessage');
+            successMessage.style.display = 'block';
+            
+            // Sembunyikan pesan sukses setelah 3 detik
+            setTimeout(() => {
+                successMessage.style.display = 'none';
+            }, 3000);
+            
+            // Scroll otomatis ke text container dengan efek smooth
+            setTimeout(() => {
+                textContainer.scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'center'
+                });
+                
+                // Tambahkan efek highlight
+                document.querySelector('.highlight-area').style.display = 'block';
+            }, 300);
+        }
+
+        // Fungsi untuk menyalin teks
+        function copyText() {
+            const copyText = document.getElementById('copyText');
+            const textToCopy = copyText.innerText;
+            
+            // Menggunakan Clipboard API
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                // Ubah tampilan tombol untuk menunjukkan teks telah disalin
+                const copyButton = document.getElementById('copyButton');
+                copyButton.classList.add('copied');
+                copyButton.innerHTML = '✓ Kode Disalin!';
+                
+                // Efek konfirmasi
+                copyText.style.background = 'rgba(0, 204, 102, 0.2)';
+                setTimeout(() => {
+                    copyText.style.background = 'rgba(0, 0, 0, 0.3)';
+                }, 1000);
+                
+                // Kembalikan ke keadaan semula setelah 2 detik
+                setTimeout(() => {
+                    copyButton.classList.remove('copied');
+                    copyButton.innerHTML = '📋 Salin Kode Script';
+                }, 2000);
+            }).catch(err => {
+                console.error('Gagal menyalin teks: ', err);
+                alert('Gagal menyalin teks. Silakan coba lagi.');
+            });
+        }
+
+        // Inisialisasi partikel saat halaman dimuat
+        window.onload = function() {
+            createParticles();
+            
+            // Tambahkan event listener untuk tombol sosial
+            document.getElementById('subscribeBtn').addEventListener('click', function() {
+                clickButton('subscribe');
+            });
+            
+            document.getElementById('likeBtn').addEventListener('click', function() {
+                clickButton('like');
+            });
+            
+            document.getElementById('instagramBtn').addEventListener('click', function() {
+                clickButton('instagram');
+            });
+            
+            // Tambahkan event listener untuk tombol Get in Script
+            document.getElementById('getInScriptBtn').addEventListener('click', function() {
+                unlockText();
+            });
+            
+            // Tambahkan event listener untuk tombol salin
+            document.getElementById('copyButton').addEventListener('click', function() {
+                copyText();
+            });
+        };
+    </script>
+</body>
+</html>
